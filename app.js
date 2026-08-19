@@ -132,7 +132,7 @@ function renderSuccessScreen() {
     </div>
     ${intakeData.symptoms ? `
     <div class="summary-row">
-      <span class="summary-label">Notes for Dr. Key:</span>
+      <span class="summary-label">Notes for Medical Team:</span>
       <span class="summary-val">${intakeData.symptoms}</span>
     </div>` : ''}
   `;
