@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bay Beach Veterinary Hospital — Smart Intake & Triage Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Clinic Header -->
+    <header class="clinic-header">
+      <div class="brand-row">
+        <div class="logo-group">
+          <div class="brand-icon">🐾</div>
+          <div class="brand-text">
+            <h1>Bay Beach</h1>
+            <span class="sub-brand">Veterinary Hospital & Urgent Care</span>
+          </div>
+        </div>
+        <div class="clinic-badge">
+          <span class="status-dot"></span>
+          <span>Locally Owned • Virginia Beach</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Card -->
+    <main class="portal-card">
+      <!-- Progress Bar -->
+      <div class="progress-container">
+        <div class="steps-indicator">
+          <div class="step-node active" data-step="1">
+            <div class="node-circle">1</div>
+            <span class="node-label">Triage & Check</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-node" data-step="2">
+            <div class="node-circle">2</div>
+            <span class="node-label">Patient Info</span>
+          </div>
+          <div class="step-line"></div>
+          <div class="step-node" data-step="3">
+            <div class="node-circle">3</div>
+            <span class="node-label">Contact & Arrival</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 1: Urgent Triage Screener -->
+      <section class="step-view active" id="step1">
+        <div class="section-title-wrap">
+          <span class="eyebrow">Fast Triage Protocol</span>
+          <h2>How is your pet feeling right now?</h2>
+          <p class="section-desc">We prioritize care based on immediate medical urgency to keep every animal safe.</p>
+        </div>
+
+        <div class="triage-cards-grid">
+          <label class="triage-card routine-opt">
+            <input type="radio" name="urgency" value="routine" checked>
+            <div class="card-inner">
+              <div class="card-emoji">🩺</div>
+              <div class="card-text">
+                <h3>Routine Care & Checkups</h3>
+                <p>Wellness exams, annual vaccines, check-ins, or mild recurring issues.</p>
+              </div>
+              <div class="select-badge">Standard</div>
+            </div>
+          </label>
+
+          <label class="triage-card urgent-opt">
+            <input type="radio" name="urgency" value="sick">
+            <div class="card-inner">
+              <div class="card-emoji">💧</div>
+              <div class="card-text">
+                <h3>Mild / Moderate Sickness</h3>
+                <p>Urinary urgency / frequent litter box visits, vomiting, ear issues, or lethargy.</p>
+              </div>
+              <div class="select-badge">Same-Day</div>
+            </div>
+          </label>
+
+          <label class="triage-card emergency-opt">
+            <input type="radio" name="urgency" value="emergency">
+            <div class="card-inner">
+              <div class="card-emoji">🚨</div>
+              <div class="card-text">
+                <h3>Acute Critical Emergency</h3>
+                <p>Straining with zero urine output, collapse, severe breathing distress, or trauma.</p>
+              </div>
+              <div class="select-badge">Immediate</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- Emergency Banner (conditionally shown) -->
+        <div class="emergency-alert hidden" id="emergencyBanner">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-content">
+            <h4>Critical Emergency Detected</h4>
+            <p>Please do not wait for a form submission. Head directly to our 24/7 hospital or call us immediately.</p>
+            <a href="tel:7573403913" class="call-btn">📞 Call Main Clinic: (757) 340-3913</a>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button type="button" class="btn btn-primary next-btn" onclick="goToStep(2)">
+            Continue to Patient Details
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- STEP 2: Patient Details -->
+      <section class="step-view" id="step2">
+        <div class="section-title-wrap">
+          <span class="eyebrow">Step 2 of 3</span>
+          <h2>Tell us about your pet</h2>
+          <p class="section-desc">Quick details to prepare the examination room and records.</p>
+        </div>
+
+        <form id="petForm" class="form-grid">
+          <div class="input-group">
+            <label for="petName">Pet's Name *</label>
+            <input type="text" id="petName" placeholder="e.g., Texas or Magnolia" required>
+          </div>
+
+          <div class="input-group">
+            <label for="species">Species *</label>
+            <select id="species" required>
+              <option value="cat" selected>🐱 Cat / Feline</option>
+              <option value="dog">🐶 Dog / Canine</option>
+              <option value="other">🐾 Other Companion</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="breed">Breed / Color</label>
+            <input type="text" id="breed" placeholder="e.g., DSH / Tuxedo / Golden">
+          </div>
+
+          <div class="input-group">
+            <label for="age">Approximate Age</label>
+            <input type="text" id="age" placeholder="e.g., 3 years or Adult">
+          </div>
+
+          <div class="input-group full-width">
+            <label for="symptoms">Primary Reason for Today's Visit / Symptoms</label>
+            <textarea id="symptoms" rows="3" placeholder="e.g., Frequent litter box trips, started soupy wet food diet, needs urine check."></textarea>
+          </div>
+
+          <div class="input-group full-width">
+            <label class="fear-free-toggle">
+              <input type="checkbox" id="fearFreePref" checked>
+              <span class="toggle-box"></span>
+              <span class="toggle-text">
+                <strong>Fear-Free Handling Request</strong>
+                <small>Use quiet examination rooms, feline pheromones, and low-stress handling techniques.</small>
+              </span>
+            </label>
+          </div>
+        </form>
+
+        <div class="button-row">
+          <button type="button" class="btn btn-ghost" onclick="goToStep(1)">← Back</button>
+          <button type="button" class="btn btn-primary" onclick="validateAndGoToStep3()">
+            Next: Contact & Arrival
+            <span class="arrow">→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- STEP 3: Contact & Arrival -->
+      <section class="step-view" id="step3">
+        <div class="section-title-wrap">
+          <span class="eyebrow">Step 3 of 3</span>
+          <h2>Your Contact Information</h2>
+          <p class="section-desc">Zero intrusive paperwork. Just the essential info to keep you updated.</p>
+        </div>
+
+        <form id="ownerForm" class="form-grid">
+          <div class="input-group">
+            <label for="ownerName">Your Name *</label>
+            <input type="text" id="ownerName" placeholder="e.g., Heather Tully" required>
+          </div>
+
+          <div class="input-group">
+            <label for="ownerPhone">Cell Phone (for SMS updates) *</label>
+            <input type="tel" id="ownerPhone" placeholder="(757) 000-0000" required>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="ownerEmail">Email Address (for receipts & discharge summary) *</label>
+            <input type="email" id="ownerEmail" placeholder="heather@example.com" required>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="preferredTime">Preferred Arrival / Appointment Date</label>
+            <input type="text" id="preferredTime" value="Thursday Morning Appointment" placeholder="e.g., Thursday 10:00 AM">
+          </div>
+
+          <div class="digital-consent-card full-width">
+            <div class="consent-header">
+              <span class="shield-icon">🛡️</span>
+              <h4>Simple 1-Tap Check-In</h4>
+            </div>
+            <p>By checking in, your file is automatically staged for Dr. Key and the medical staff. Routine billing agreements are finalized in the exam room—no 40-page forms required.</p>
+          </div>
+        </form>
+
+        <div class="button-row">
+          <button type="button" class="btn btn-ghost" onclick="goToStep(2)">← Back</button>
+          <button type="button" class="btn btn-submit" id="submitBtn" onclick="submitIntake()">
+            Complete Smart Check-In 🐾
+          </button>
+        </div>
+      </section>
+
+      <!-- SUCCESS CONFIRMATION SCREEN -->
+      <section class="step-view" id="successScreen">
+        <div class="success-wrap">
+          <div class="success-icon">✨</div>
+          <span class="eyebrow green">Check-In Staged Successfully</span>
+          <h2 id="successHeading">We're Ready for You!</h2>
+          <p id="successMessage" class="success-desc">
+            Your intake details have been transmitted directly to the Bay Beach front desk and Dr. Key's team.
+          </p>
+
+          <div class="summary-card" id="summaryCard">
+            <!-- Dynamic Injection -->
+          </div>
+
+          <div class="action-buttons">
+            <a href="https://baybeachvets.com" class="btn btn-primary" target="_blank">Visit Main Hospital Site</a>
+            <button class="btn btn-ghost" onclick="resetForm()">Start New Registration</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="portal-footer">
+      <div class="footer-note">
+        Built with care by <strong>Non Code Studio</strong> • Modern High-Leverage Systems Architecture
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
